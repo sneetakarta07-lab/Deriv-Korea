@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>2026 글로벌 마켓 트레이딩 자격 테스트</title>
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --card: #151a24;
+      --accent: #ff444f;
+      --green: #00c896;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", sans-serif; }
+    body { background-color: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; justify-content: center; align-items: center; padding: 16px; overflow-x: hidden; }
+    
+    .top-bar { position: fixed; top: 0; left: 0; width: 100%; background: #1e293b; color: #38bdf8; font-size: 13px; text-align: center; padding: 8px; font-weight: 600; z-index: 10; border-bottom: 1px solid #334155; }
+    .top-bar span { color: var(--green); }
+
+    .container { max-width: 460px; width: 100%; background: var(--card); border-radius: 16px; padding: 26px 20px; box-shadow: 0 20px 45px rgba(0,0,0,0.6); border: 1px solid #262f40; margin-top: 36px; text-align: center; position: relative; }
+    
+    .badge { display: inline-block; background: rgba(0, 200, 150, 0.15); color: var(--green); font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 20px; margin-bottom: 12px; border: 1px solid rgba(0, 200, 150, 0.3); }
+    
+    h1 { font-size: 21px; line-height: 1.4; margin-bottom: 8px; font-weight: 800; color: #ffffff; word-break: keep-all; }
+    .highlight { color: var(--accent); }
+    .sub { font-size: 13.5px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; word-break: keep-all; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; background: #0f131c; padding: 12px; border-radius: 12px; border: 1px solid #1e2636; }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-val { font-size: 15px; font-weight: 800; color: #fff; }
+    .stat-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .progress-bar { height: 6px; width: 100%; background: #262f40; border-radius: 4px; margin-bottom: 18px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 33%; background: linear-gradient(90deg, var(--accent), #ff7b82); transition: width 0.3s ease; }
+
+    .question-box { text-align: left; }
+    .q-title { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: #e2e8f0; }
+    
+    .btn-option { display: block; width: 100%; text-align: left; background: #1e2636; color: #fff; border: 1px solid #2e3a52; padding: 14px 16px; margin-bottom: 10px; border-radius: 10px; font-size: 14.5px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+    .btn-option:hover, .btn-option:active { background: #283347; border-color: var(--accent); transform: translateY(-1px); }
+    .btn-option::after { content: '→'; color: var(--muted); font-weight: bold; }
+
+    .loader-box { display: none; padding: 30px 10px; }
+    .spinner { width: 42px; height: 42px; border: 4px solid #262f40; border-top-color: var(--green); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Lead Form Styling */
+    .final-box { display: none; text-align: left; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; }
+    .input-field { width: 100%; background: #0f131c; border: 1px solid #334155; color: #fff; padding: 14px; border-radius: 10px; font-size: 15px; outline: none; transition: border 0.2s; }
+    .input-field:focus { border-color: var(--green); }
+    .input-field::placeholder { color: #475569; }
+
+    .privacy-note { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--muted); margin: 12px 0; cursor: pointer; }
+    .privacy-note input { margin-top: 3px; accent-color: var(--green); }
+
+    .cta-btn { display: block; width: 100%; background: linear-gradient(135deg, #ff444f 0%, #d92b36 100%); color: #fff; text-align: center; text-decoration: none; font-size: 17px; font-weight: 800; padding: 16px; border-radius: 12px; margin-top: 12px; box-shadow: 0 8px 25px rgba(255, 68, 79, 0.4); border: none; cursor: pointer; transition: opacity 0.2s; }
+    .cta-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .features-list { background: #0f131c; padding: 12px 14px; border-radius: 10px; margin: 12px 0 16px; font-size: 12.5px; color: #cbd5e1; line-height: 1.7; border: 1px solid #1e2636; }
+    .features-list div::before { content: '✔ '; color: var(--green); font-weight: bold; }
+
+    .footer-disclaimer { max-width: 460px; font-size: 11px; color: #475569; text-align: center; margin-top: 18px; line-height: 1.4; }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    ⚡ 현재 한국 트레이더 <span>1,428명</span>이 24/7 볼라틸리티 지수를 거래 중입니다
+  </div>
+
+  <div class="container">
+    <div class="badge">🇰🇷 한국 사용자 전용 혜택 (2026)</div>
+    <h1>24시간 글로벌 외환 & 지수 트레이딩 <span class="highlight">$10,000 무료 데모</span> 지원</h1>
+    <p class="sub">주말에도 멈추지 않는 합성 지수(Synthetic Indices) 및 외환 시장! 30초 설문 후 리스크 없는 가상 계좌를 즉시 활성화하세요.</p>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-val">1:1000</span>
+        <span class="stat-lbl">최대 레버리지</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">24/7</span>
+        <span class="stat-lbl">주말 거래 가능</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val">USDT</span>
+        <span class="stat-lbl">빠른 입출금</span>
+      </div>
+    </div>
+
+    <div class="progress-bar" id="progBar">
+      <div class="progress-fill" id="progFill"></div>
+    </div>
+
+    <!-- Step 1: Quiz Section -->
+    <div id="quizArea" class="question-box">
+      <div class="q-title" id="qText">질문 1/3: 현재 선호하는 투자 자산은 무엇입니까?</div>
+      <div id="optionsContainer">
+        <button class="btn-option" onclick="nextStep()">외환 (USD/KRW, EUR/USD, 금)</button>
+        <button class="btn-option" onclick="nextStep()">24/7 고수익 합성 지수 (Volatility Indices)</button>
+        <button class="btn-option" onclick="nextStep()">암호화폐 및 글로벌 주식 지수</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Loading Section -->
+    <div id="loaderArea" class="loader-box">
+      <div class="spinner"></div>
+      <p style="font-weight: 700; font-size: 16px; margin-bottom: 6px;">회원님의 맞춤 트레이딩 환경을 분석 중입니다...</p>
+      <p style="font-size: 13px; color: var(--muted);">$10,000 무료 가상 자금 계좌 할당 가능 여부 확인 중</p>
+    </div>
+
+    <!-- Step 3: Lead Capture Form (Email + Phone) -->
+    <div id="finalArea" class="final-box">
+      <h2 style="color: var(--green); font-size: 19px; margin-bottom: 6px; text-align: center;">🎉 자격이 확인되었습니다!</h2>
+      <p style="font-size: 13.5px; color: #e2e8f0; text-align: center; margin-bottom: 12px;">
+        <strong>$10,000 무료 데모 계좌</strong> 및 <strong>한국어 VIP 매매 시그널</strong>을 받을 연락처를 입력하세요.
+      </p>
+      
+      <div class="features-list">
+        <div>$10,000 가상 시드머니 및 Deriv 공식 플랫폼 즉시 연결</div>
+        <div>USDT(테더) 입출금 가이드 및 AI 변동성 알림 제공</div>
+      </div>
+
+      <form id="leadForm" onsubmit="handleLeadSubmit(event)">
+        <div class="form-group">
+          <label for="userEmail">이메일 주소 (Email)</label>
+          <input type="email" id="userEmail" class="input-field" placeholder="example@naver.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="userPhone">휴대폰 번호 (카카오톡/SMS 수신용)</label>
+          <input type="tel" id="userPhone" class="input-field" placeholder="010-1234-5678" pattern="[0-9\-+\s]{9,15}" required>
+        </div>
+
+        <label class="privacy-note">
+          <input type="checkbox" required checked>
+          <span>[필수] 무료 데모 계좌 개설 안내 및 투자 정보 수신에 동의합니다.</span>
+        </label>
+
+        <button type="submit" id="submitBtn" class="cta-btn">
+          무료 $10,000 계좌 즉시 활성화 →
+        </button>
+      </form>
+      <p style="font-size: 12px; color: var(--muted); margin-top: 10px; text-align: center;">
+        ⏳ 남은 무료 보너스 슬롯: <strong style="color:#ff444f;">7자리</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-disclaimer">
+    위험 고지: 외환 및 파생상품 거래는 높은 레버리지로 인해 원금 손실의 위험이 따릅니다. 본 페이지는 정보 제공 및 시뮬레이션 계좌 안내를 목적으로 합니다.
+  </div>
+
+  <script>
+    // ==========================================
+    // CONFIGURATION (Aapke Links Set Hain)
+    // ==========================================
+    const DERIV_AFFILIATE_LINK = "https://t.deriv.link?t=NEGTK7BHFWUG";
+    const POPADS_AID = "ac7e32847e3e8169f251a1dff13a8d7b";
+    const CONVERSION_VALUE = "1"; // 1 USD or custom lead value for PopAds ROI tracking
+
+    // OPTIONAL: Apna Google Apps Script ya Make.com Webhook URL yahan dalein jahan Email/Phone save honge
+    const LEAD_WEBHOOK_URL = ""; 
+
+    // Read PopAds URL Parameters (?clickid=[IMPRESSIONID]&siteid=[WEBSITEID])
+    const urlParams = new URLSearchParams(window.location.search);
+    const impressionId = urlParams.get('clickid') || urlParams.get('id') || '';
+    const websiteId = urlParams.get('siteid') || '';
+
+    // Quiz Questions
+    const questions = [
+      {
+        q: "질문 1/3: 현재 선호하는 투자 자산은 무엇입니까?",
+        opts: ["외환 (USD/KRW, EUR/USD, 금)", "24/7 고수익 합성 지수 (Volatility Indices)", "암호화폐 및 글로벌 주식 지수"]
+      },
+      {
+        q: "질문 2/3: 하루 중 차트 분석에 투자할 수 있는 시간은?",
+        opts: ["하루 30분 미만 (자동매매 / 봇 선호)", "1~2시간 (단기 스캘핑 선호)", "주말 집중 트레이딩 선호"]
+      },
+      {
+        q: "질문 3/3: 리스크 없는 $10,000 무료 연습 계좌부터 시작하시겠습니까?",
+        opts: ["네, 무료 데모 자금으로 먼저 테스트하겠습니다", "실전 소액($10~$50) 거래도 함께 원합니다"]
+      }
+    ];
+
+    let currentStep = 0;
+
+    function nextStep() {
+      currentStep++;
+      const progFill = document.getElementById('progFill');
+      
+      if (currentStep < questions.length) {
+        progFill.style.width = ((currentStep + 1) * 33.3) + '%';
+        document.getElementById('qText').innerText = questions[currentStep].q;
+        const container = document.getElementById('optionsContainer');
+        container.innerHTML = '';
+        questions[currentStep].opts.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'btn-option';
+          btn.innerText = opt;
+          btn.onclick = () => nextStep();
+          container.appendChild(btn);
+        });
+      } else {
+        document.getElementById('progBar').style.display = 'none';
+        document.getElementById('quizArea').style.display = 'none';
+        document.getElementById('loaderArea').style.display = 'block';
+        
+        setTimeout(() => {
+          document.getElementById('loaderArea').style.display = 'none';
+          document.getElementById('finalArea').style.display = 'block';
+        }, 1100);
+      }
+    }
+
+    // Auto-format Korean Phone Number (010-XXXX-XXXX)
+    document.getElementById('userPhone').addEventListener('input', function (e) {
+      let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
+      e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+
+    // Handle Lead Submission + Fire PopAds Postback + Redirect to Deriv
+    async function handleLeadSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = "계좌 연결 중... 잠시만 기다려주세요";
+
+      const email = document.getElementById('userEmail').value.trim();
+      const phone = document.getElementById('userPhone').value.trim();
+
+      // 1. Fire PopAds Conversion Pixel / Postback
+      if (impressionId) {
+        const postbackUrl = `https://serve.popads.net/cpixel.php?s2s=1&aid=${POPADS_AID}&id=${encodeURIComponent(impressionId)}&value=${CONVERSION_VALUE}`;
+        // Fire via Image Pixel (works smoothly across HTTP/HTTPS without CORS block)
+        const pixel = new Image();
+        pixel.src = postbackUrl;
+      }
+
+      // 2. Send Email & Phone to Your Google Sheet / Webhook (if configured)
+      if (LEAD_WEBHOOK_URL) {
+        try {
+          await fetch(LEAD_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email,
+              phone: phone,
+              clickid: impressionId,
+              siteid: websiteId,
+              country: "KR",
+              timestamp: new Date().toISOString()
+            })
+          });
+        } catch (err) {
+          console.log("Webhook error:", err);
+        }
+      }
+
+      // 3. Redirect User to Deriv Affiliate Link after 800ms
+      setTimeout(() => {
+        window.location.href = DERIV_AFFILIATE_LINK;
+      }, 800);
+    }
+  </script>
+</body>
+</html>
